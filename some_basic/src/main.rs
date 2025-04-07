@@ -57,6 +57,7 @@ fn main() {
     println!("{:?}", result_vec);
     check_turbo_fish();
     collection_types();
+    macros_play();
 }
 
 fn take_fifth(val: Vec<i32>) -> Option<i32> {
@@ -191,4 +192,11 @@ fn collection_types() {
         number_hashset.len(),
         man_len
     )
+}
+
+fn macros_play() {
+    let my_name = "John Doe";
+    assert!(my_name == "John Doe");
+    assert_eq!(my_name, "John Doe");
+    assert_ne!(my_name, "Jack");
 }
