@@ -2,6 +2,12 @@
 use std::cmp::PartialOrd;
 use std::fmt::{Debug, Display};
 
+//Some commonly used macros
+//panic!()
+//assert!()
+//assert_eq!()
+//assert_ne!()
+
 #[derive(Debug)]
 struct Animal {
     name: String,
