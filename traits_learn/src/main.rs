@@ -1,4 +1,4 @@
-use std::fmt::{Debug, Display};
+use std::fmt::{Debug, Display, format};
 
 pub struct NewsArticle {
     pub author: String,
@@ -113,4 +113,79 @@ fn main() {
     println!("Tweet author: {}", tweet.summarize_author());
 
     println!("{:?}", returns_summarizable().summarize());
+
+    struct Animal {
+        name: String,
+    }
+
+    trait Canine {
+        fn bark(&self) -> String {
+            String::from("Woof") // This is default value if not implmeneted in the struct
+        }
+
+        fn run(&self) -> String;
+    }
+
+    impl Canine for Animal {
+        fn run(&self) -> String {
+            String::from("Running")
+        }
+
+        fn bark(&self) -> String {
+            format!("{} is running", self.name)
+        }
+    }
+
+    let rover = Animal {
+        name: "Rover".to_string(),
+    };
+
+    rover.bark();
+    rover.run();
+    generics_traits();
+}
+
+fn generics_traits() {
+    struct Elf {
+        name: String,
+    }
+    struct Human {
+        name: String,
+    }
+
+    trait Creature {
+        fn get_name(&self) -> String {
+            "Default".to_string()
+        }
+    }
+
+    impl Creature for Elf {
+        fn get_name(&self) -> String {
+            format!("{}", self.name)
+        }
+    }
+
+    impl Creature for Human {
+        fn get_name(&self) -> String {
+            format!("{}", self.name)
+        }
+    }
+
+    fn which_creator<T>(creature: T)
+    where
+        T: Creature,
+    {
+        println!("Creature name: {}", creature.get_name());
+    }
+
+    let elf = Elf {
+        name: String::from("Elf"),
+    };
+    let human = Human {
+        name: String::from("Human"),
+    };
+
+    // Here below we take arguments from different types
+    which_creator(elf);
+    which_creator(human);
 }
