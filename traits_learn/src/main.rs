@@ -143,6 +143,7 @@ fn main() {
     rover.bark();
     rover.run();
     generics_traits();
+    fight_app();
 }
 
 fn generics_traits() {
@@ -188,4 +189,58 @@ fn generics_traits() {
     // Here below we take arguments from different types
     which_creator(elf);
     which_creator(human);
+}
+
+struct Monster {
+    health: i32,
+}
+struct Wizard {}
+struct Ranger {}
+
+trait FightClose {
+    fn attack_with_sword(&self, opponent: &mut Monster) {
+        opponent.health -= 10;
+        println!(
+            "You aattack with your sword and your opponent has {} health left",
+            opponent.health
+        );
+    }
+
+    fn attack_with_hand(&self, opponent: &mut Monster) {
+        opponent.health -= 2;
+        println!(
+            "You aattack with your sword and your opponent has {} health left",
+            opponent.health
+        );
+    }
+}
+
+impl FightClose for Wizard {}
+
+impl FightClose for Ranger {}
+
+trait FightFromDistance {
+    fn attack_with_bow(&self, opponent: &mut Monster, distance: i32) {
+        if distance < 10 {
+            opponent.health -= 10;
+            println!(
+                "You aattack with your bow and your opponent has {} health left",
+                opponent.health
+            );
+        }
+    }
+}
+
+impl FightFromDistance for Ranger {}
+
+fn fight_app() {
+    let radagast = Wizard {};
+    let aragorn = Ranger {};
+
+    let mut uruk_hai = Monster { health: 40 };
+
+    let distance = 8;
+    radagast.attack_with_sword(&mut uruk_hai);
+    aragorn.attack_with_bow(&mut uruk_hai, distance);
+    radagast.attack_with_hand(&mut uruk_hai);
 }
