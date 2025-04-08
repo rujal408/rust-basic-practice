@@ -1,4 +1,5 @@
-use std::fmt::{Debug, Display, format};
+use std::convert::From;
+use std::fmt::{Debug, Display};
 
 pub struct NewsArticle {
     pub author: String,
@@ -144,6 +145,7 @@ fn main() {
     rover.run();
     generics_traits();
     fight_app();
+    trait_as_type();
 }
 
 fn generics_traits() {
@@ -243,4 +245,47 @@ fn fight_app() {
     radagast.attack_with_sword(&mut uruk_hai);
     aragorn.attack_with_bow(&mut uruk_hai, distance);
     radagast.attack_with_hand(&mut uruk_hai);
+}
+
+fn trait_as_type() {
+    let kathmandu = City::new("Kathmandu", 1234);
+    let delhi = City::new("Delhi", 345345);
+
+    let cities = vec![kathmandu, delhi];
+    let country = Country::from(cities);
+    country.print_cities();
+}
+
+#[derive(Debug)]
+struct City {
+    name: String,
+    population: i32,
+}
+
+impl City {
+    fn new(name: &str, population: i32) -> Self {
+        Self {
+            name: name.to_string(),
+            population,
+        }
+    }
+}
+
+#[derive(Debug)]
+struct Country {
+    cities: Vec<City>,
+}
+
+impl From<Vec<City>> for Country {
+    fn from(cities: Vec<City>) -> Self {
+        Self { cities }
+    }
+}
+
+impl Country {
+    fn print_cities(&self) {
+        for city in &self.cities {
+            println!("{:?} has a population of {:?}", city.name, city.population)
+        }
+    }
 }
