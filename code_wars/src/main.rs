@@ -58,3 +58,8 @@ fn grow(nums: Vec<i32>) -> i32 {
     // BEST Solution
     // nums.iter().product()
 }
+
+// TO SOLVE: [1,-2,3,6]=>1*3*6
+// fn positive_sum(arr: &[i32]) -> i32 {
+//     arr.iter().filter(|x| x.is_positive()).sum()
+// }
