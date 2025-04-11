@@ -27,6 +27,7 @@ fn main() {
     for book in my_library {
         println!("{}", book);
     }
+    enumerate_work()
 }
 
 #[derive(Debug, Clone)]
@@ -62,4 +63,16 @@ impl Iterator for Library {
             _ => None,
         }
     }
+}
+
+fn enumerate_work() {
+    let num_vec = vec![10, 9, 8];
+
+    let a = num_vec
+        .into_iter()
+        .enumerate()
+        .map(|(index, mut number)| (index, number + 10))
+        .collect::<Vec<_>>();
+
+    println!("{:?}", a)
 }
