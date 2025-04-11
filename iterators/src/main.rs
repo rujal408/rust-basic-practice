@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 fn main() {
     let mut vector_1 = vec![1, 2, 3];
     let vector_a = vector_1.iter().map(|value| value * 2).collect::<Vec<i32>>();
@@ -27,7 +29,8 @@ fn main() {
     for book in my_library {
         println!("{}", book);
     }
-    enumerate_work()
+    enumerate_work();
+    zip_collect();
 }
 
 #[derive(Debug, Clone)]
@@ -75,4 +78,16 @@ fn enumerate_work() {
         .collect::<Vec<_>>();
 
     println!("{:?}", a)
+}
+
+fn zip_collect() {
+    let some_numbers = vec![0, 1, 2, 3];
+    let some_words = vec!["zero", "one", "two", "three"];
+
+    let number_hash_map = some_numbers
+        .into_iter()
+        .zip(some_words.into_iter())
+        .collect::<HashMap<_, _>>();
+
+    println!("Converted to hashmap = {:?}", number_hash_map);
 }
