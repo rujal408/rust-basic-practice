@@ -95,3 +95,15 @@ fn abbrev_name(name: &str) -> String {
 
 // NOTE:
 // 'a' is char type and "a" is &str type
+
+fn enough(cap: i32, on: i32, wait: i32) -> i32 {
+    let remaining = cap-on;
+    if remaining >= wait {
+        0
+    }else{
+        wait - remaining
+    }
+
+    // BEST SOLUTION
+    // (on + wait - cap).max(0)
+}
