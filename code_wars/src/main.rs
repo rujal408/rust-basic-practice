@@ -84,5 +84,14 @@ fn remove_exclamation_marks(input: &str) -> String {
     //
 }
 
+// Rujal Sapkota into R.S
+fn abbrev_name(name: &str) -> String {
+    name.to_string()
+        .split(" ")
+        .map(|x| x.chars().nth(0).unwrap().to_ascii_uppercase().to_string())
+        .collect::<Vec<String>>()
+        .join(".")
+}
+
 // NOTE:
 // 'a' is char type and "a" is &str type
