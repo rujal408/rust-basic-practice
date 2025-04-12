@@ -63,3 +63,26 @@ fn grow(nums: Vec<i32>) -> i32 {
 // fn positive_sum(arr: &[i32]) -> i32 {
 //     arr.iter().filter(|x| x.is_positive()).sum()
 // }
+
+fn count_by(x: u32, n: u32) -> Vec<u32> {
+    let mut v = Vec::new();
+
+    for i in 1..=n {
+        v.push(x * i);
+    }
+    v
+
+    // SOLID Solution
+    // (1..=n).map(|e| x*e).collect()
+}
+
+fn remove_exclamation_marks(input: &str) -> String {
+    input.chars().filter(|c| *c != '!').collect()
+
+    // SOLID SOLUTION
+    // input.replace("!", "")
+    //
+}
+
+// NOTE:
+// 'a' is char type and "a" is &str type

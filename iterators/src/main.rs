@@ -91,3 +91,14 @@ fn zip_collect() {
 
     println!("Converted to hashmap = {:?}", number_hash_map);
 }
+fn count_by(x: u32, n: u32) -> Vec<u32> {
+    let mut v = Vec::new();
+
+    for i in 1..=n {
+        v.push(x * i);
+    }
+    v
+
+    // SOLID Solution
+    // (1..=n).map(|e| x*e).collect()
+}
