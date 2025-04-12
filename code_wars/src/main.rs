@@ -107,3 +107,13 @@ fn enough(cap: i32, on: i32, wait: i32) -> i32 {
     // BEST SOLUTION
     // (on + wait - cap).max(0)
 }
+
+fn open_or_senior(data: Vec<(i32, i32)>) -> Vec<String> {
+    data.iter().map(|d| {
+        if (d.0>=55 && d.1>7)||(d.1>=55 && d.0>7){
+            "Senior".to_string()
+        } else{
+            "Open".to_string()
+        }
+    }).collect()
+}
