@@ -5,6 +5,12 @@ fn main() {
 
     let c: char = 'A';
     assert_eq!(get_grade(100, 100, 100), c);
+    binary_slice_to_number([1,0,0,0]);
+
+    assert_eq!(binary_slice_to_number(&vec![0,0,0,1]), 1);
+    assert_eq!(binary_slice_to_number(&vec![0,0,1,0]), 2);
+    assert_eq!(binary_slice_to_number(&vec![1,1,1,1]), 15);
+    assert_eq!(binary_slice_to_number(&vec![0,1,1,0]), 6);
 }
 
 fn make_negative(n: i32) -> i32 {
@@ -116,4 +122,10 @@ fn open_or_senior(data: Vec<(i32, i32)>) -> Vec<String> {
             "Open".to_string()
         }
     }).collect()
+}
+
+fn binary_slice_to_number(slice: &[u32]) -> u32 {
+    // your code here
+    let n = slice.iter().map(|x| x.to_string()).collect::<Vec<String>>().join("");
+    u32::from_str_radix(&n,2).unwrap()
 }
