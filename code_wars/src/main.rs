@@ -128,4 +128,12 @@ fn binary_slice_to_number(slice: &[u32]) -> u32 {
     // your code here
     let n = slice.iter().map(|x| x.to_string()).collect::<Vec<String>>().join("");
     u32::from_str_radix(&n,2).unwrap()
+
+    // BEST SOLUTIONS
+    //  slice
+    // .iter()
+    // .rev()
+    // .enumerate()
+    // .map(|(i, b)| b << i)
+    // .sum()
 }
