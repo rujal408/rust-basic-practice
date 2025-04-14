@@ -5,12 +5,12 @@ fn main() {
 
     let c: char = 'A';
     assert_eq!(get_grade(100, 100, 100), c);
-    binary_slice_to_number([1,0,0,0]);
+    binary_slice_to_number([1, 0, 0, 0]);
 
-    assert_eq!(binary_slice_to_number(&vec![0,0,0,1]), 1);
-    assert_eq!(binary_slice_to_number(&vec![0,0,1,0]), 2);
-    assert_eq!(binary_slice_to_number(&vec![1,1,1,1]), 15);
-    assert_eq!(binary_slice_to_number(&vec![0,1,1,0]), 6);
+    assert_eq!(binary_slice_to_number(&vec![0, 0, 0, 1]), 1);
+    assert_eq!(binary_slice_to_number(&vec![0, 0, 1, 0]), 2);
+    assert_eq!(binary_slice_to_number(&vec![1, 1, 1, 1]), 15);
+    assert_eq!(binary_slice_to_number(&vec![0, 1, 1, 0]), 6);
 }
 
 fn make_negative(n: i32) -> i32 {
@@ -103,10 +103,10 @@ fn abbrev_name(name: &str) -> String {
 // 'a' is char type and "a" is &str type
 
 fn enough(cap: i32, on: i32, wait: i32) -> i32 {
-    let remaining = cap-on;
+    let remaining = cap - on;
     if remaining >= wait {
         0
-    }else{
+    } else {
         wait - remaining
     }
 
@@ -115,19 +115,25 @@ fn enough(cap: i32, on: i32, wait: i32) -> i32 {
 }
 
 fn open_or_senior(data: Vec<(i32, i32)>) -> Vec<String> {
-    data.iter().map(|d| {
-        if (d.0>=55 && d.1>7)||(d.1>=55 && d.0>7){
-            "Senior".to_string()
-        } else{
-            "Open".to_string()
-        }
-    }).collect()
+    data.iter()
+        .map(|d| {
+            if (d.0 >= 55 && d.1 > 7) || (d.1 >= 55 && d.0 > 7) {
+                "Senior".to_string()
+            } else {
+                "Open".to_string()
+            }
+        })
+        .collect()
 }
 
 fn binary_slice_to_number(slice: &[u32]) -> u32 {
     // your code here
-    let n = slice.iter().map(|x| x.to_string()).collect::<Vec<String>>().join("");
-    u32::from_str_radix(&n,2).unwrap()
+    let n = slice
+        .iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>()
+        .join("");
+    u32::from_str_radix(&n, 2).unwrap()
 
     // BEST SOLUTIONS
     //  slice
@@ -136,4 +142,8 @@ fn binary_slice_to_number(slice: &[u32]) -> u32 {
     // .enumerate()
     // .map(|(i, b)| b << i)
     // .sum()
+}
+
+fn number(bus_stops: &[(i32, i32)]) -> i32 {
+    bus_stops.iter().map(|(x, y)| x - y).sum()
 }
