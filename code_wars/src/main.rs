@@ -11,6 +11,9 @@ fn main() {
     assert_eq!(binary_slice_to_number(&vec![0, 0, 1, 0]), 2);
     assert_eq!(binary_slice_to_number(&vec![1, 1, 1, 1]), 15);
     assert_eq!(binary_slice_to_number(&vec![0, 1, 1, 0]), 6);
+
+    let a: &str = "This website is for losers LOL!";
+    disemvowel(a)
 }
 
 fn make_negative(n: i32) -> i32 {
@@ -146,4 +149,19 @@ fn binary_slice_to_number(slice: &[u32]) -> u32 {
 
 fn number(bus_stops: &[(i32, i32)]) -> i32 {
     bus_stops.iter().map(|(x, y)| x - y).sum()
+}
+
+fn disemvowel(s: &str) -> String {
+    let vowels = ['a', 'e', 'i', 'o', 'u'];
+    s.to_string()
+        .split("")
+        .map(|x| {
+            x.chars()
+                .filter(|y| !vowels.contains(&y.to_ascii_lowercase()))
+                .collect()
+        })
+        .collect::<Vec<String>>()
+        .join("")
+    // BEST SOLUTION
+    // s.replace(['A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'], "")
 }
