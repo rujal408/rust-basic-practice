@@ -165,3 +165,29 @@ fn disemvowel(s: &str) -> String {
     // BEST SOLUTION
     // s.replace(['A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'], "")
 }
+
+fn remove_smallest(numbers: &[u32]) -> Vec<u32> {
+    if numbers.is_empty() {
+        numbers.to_vec()
+    } else {
+        let mut smallest: u32 = numbers[0];
+        let mut _ind: usize = 0;
+
+        for (i, n) in numbers.iter().enumerate() {
+            if n < &smallest {
+                smallest = *n;
+                _ind = i;
+            }
+        }
+        let mut new_vec = numbers.to_vec();
+        new_vec.remove(_ind);
+        new_vec
+    }
+
+    // BEST SOLUTION
+    // let mut numbers = numbers.to_vec();
+    // match numbers.iter().position_min() {
+    //     None => numbers,
+    //     Some(m) => {numbers.remove(m); numbers}
+    // }
+}
