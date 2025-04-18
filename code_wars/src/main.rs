@@ -91,6 +91,9 @@ fn abbrev_name(name: &str) -> String {
         .map(|x| x.chars().nth(0).unwrap().to_ascii_uppercase().to_string())
         .collect::<Vec<String>>()
         .join(".")
+
+    // One Solution
+    // join(name.split(' ').map(|x| x.chars().next().unwrap().to_uppercase()), ".")
 }
 
 // NOTE:
