@@ -73,3 +73,20 @@ fn rps(p1: &str, p2: &str) -> &'static str {
         }
     }
 }
+
+pub fn remove_char(s: &str) -> String {
+    s.chars()
+        .enumerate()
+        .map(|(i, x)| {
+            if i > 0 && i < s.len() - 1 {
+                x.to_string()
+            } else {
+                "".to_string()
+            }
+        })
+        .collect()
+
+    // BEST SOLUTION
+    //     s[1..s.len() - 1].to_string()
+    //     s.chars().skip(1).take(s.chars().count() - 2).collect()
+}
