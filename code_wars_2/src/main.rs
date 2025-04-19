@@ -1,6 +1,6 @@
 fn main() {
-    println!("Hello, world!");
     longest("xyaabbbccccdefww", "xxxxyyyyabklmopq");
+    rps("paper", "rock");
 }
 
 // a = "xyaabbbccccdefww"
@@ -9,7 +9,7 @@ fn main() {
 
 // a = "abcdefghijklmnopqrstuvwxyz"
 // longest(a, a) -> "abcdefghijklmnopqrstuvwxyz"
-fn longest(a1: &str, a2: &str) {
+fn longest(a1: &str, a2: &str) -> String {
     let a = a1.chars().collect::<Vec<char>>();
     let b = a2.chars().collect::<Vec<char>>();
 
@@ -39,4 +39,37 @@ use std::collections::HashSet;
 fn remove_duplicates(data: Vec<String>) -> Vec<String> {
     let set: HashSet<_> = data.into_iter().collect(); // Collect into a HashSet to remove duplicates
     set.into_iter().collect() // Convert back into a Vec
+}
+
+fn accum(s: &str) -> String {
+    s.chars()
+        .enumerate()
+        .map(|(i, x)| {
+            let result = x.to_string().repeat(i + 1).to_lowercase();
+            some_kind_of_uppercase_first_letter(&result)
+        })
+        .collect::<Vec<String>>()
+        .join("-")
+}
+
+fn some_kind_of_uppercase_first_letter(s: &str) -> String {
+    let mut c = s.chars();
+    match c.next() {
+        None => String::new(),
+        Some(f) => f.to_uppercase().chain(c).collect(),
+    }
+}
+
+fn rps(p1: &str, p2: &str) -> &'static str {
+    let items = vec!["rock", "paper", "scissors", "rock"];
+    if p1 == p2 {
+        "Draw!"
+    } else {
+        let index = items.iter().position(|&x| x == p1).unwrap_or(0);
+        if items[index + 1] == p2 {
+            "Player 2 won!"
+        } else {
+            "Player 1 won!"
+        }
+    }
 }
