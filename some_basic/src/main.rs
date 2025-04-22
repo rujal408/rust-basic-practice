@@ -232,9 +232,16 @@ fn filter_map_example() {
     ];
 
     let all_comps = company
-        .iter()
+        .into_iter()
         .filter_map(|company| company.get_ceo())
         .collect::<Vec<String>>();
 
-    println!("{:?}", all_comps);
+    println!("Companies: {:?}", all_comps);
+
+    let other_item = vec!["6.6", "Rujal", "4.4", "5.0", "Ram"];
+    let nums = other_item
+        .into_iter()
+        .filter_map(|x| x.parse::<f32>().ok())
+        .collect::<Vec<f32>>();
+    println!("Nums: {:?}", nums);
 }
