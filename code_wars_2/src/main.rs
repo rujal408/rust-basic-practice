@@ -1,6 +1,7 @@
 fn main() {
     longest("xyaabbbccccdefww", "xxxxyyyyabklmopq");
     rps("paper", "rock");
+    println!("{}", high_and_low("1 2 3 4 5"))
 }
 
 // a = "xyaabbbccccdefww"
@@ -13,7 +14,7 @@ fn longest(a1: &str, a2: &str) -> String {
     let a = a1.chars().collect::<Vec<char>>();
     let b = a2.chars().collect::<Vec<char>>();
 
-    let mut c = a
+    let c = a
         .iter()
         .chain(b.iter())
         .map(|&x| x.to_string())
@@ -89,4 +90,22 @@ pub fn remove_char(s: &str) -> String {
     // BEST SOLUTION
     //     s[1..s.len() - 1].to_string()
     //     s.chars().skip(1).take(s.chars().count() - 2).collect()
+}
+
+fn high_and_low(numbers: &str) -> String {
+    let a = numbers
+        .to_string()
+        .split_whitespace()
+        .map(|c| c.to_string().parse::<i32>().unwrap())
+        .collect::<Vec<i32>>();
+
+    let max = a
+        .iter()
+        .fold(a[0], |acc, x| if *x > acc { *x } else { acc });
+
+    let min = a
+        .iter()
+        .fold(a[0], |acc, x| if *x < acc { *x } else { acc });
+
+    format!("{} {}", max, min)
 }
