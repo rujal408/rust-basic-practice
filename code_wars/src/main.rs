@@ -5,6 +5,15 @@ fn main() {
 
     let c: char = 'A';
     assert_eq!(get_grade(100, 100, 100), c);
+    binary_slice_to_number([1, 0, 0, 0]);
+
+    assert_eq!(binary_slice_to_number(&vec![0, 0, 0, 1]), 1);
+    assert_eq!(binary_slice_to_number(&vec![0, 0, 1, 0]), 2);
+    assert_eq!(binary_slice_to_number(&vec![1, 1, 1, 1]), 15);
+    assert_eq!(binary_slice_to_number(&vec![0, 1, 1, 0]), 6);
+
+    let a: &str = "This website is for losers LOL!";
+    disemvowel(a)
 }
 
 fn make_negative(n: i32) -> i32 {
@@ -98,3 +107,90 @@ fn abbrev_name(name: &str) -> String {
 
 // NOTE:
 // 'a' is char type and "a" is &str type
+
+fn enough(cap: i32, on: i32, wait: i32) -> i32 {
+    let remaining = cap - on;
+    if remaining >= wait {
+        0
+    } else {
+        wait - remaining
+    }
+
+    // BEST SOLUTION
+    // (on + wait - cap).max(0)
+}
+
+fn open_or_senior(data: Vec<(i32, i32)>) -> Vec<String> {
+    data.iter()
+        .map(|d| {
+            if (d.0 >= 55 && d.1 > 7) || (d.1 >= 55 && d.0 > 7) {
+                "Senior".to_string()
+            } else {
+                "Open".to_string()
+            }
+        })
+        .collect()
+}
+
+fn binary_slice_to_number(slice: &[u32]) -> u32 {
+    // your code here
+    let n = slice
+        .iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>()
+        .join("");
+    u32::from_str_radix(&n, 2).unwrap()
+
+    // BEST SOLUTIONS
+    //  slice
+    // .iter()
+    // .rev()
+    // .enumerate()
+    // .map(|(i, b)| b << i)
+    // .sum()
+}
+
+fn number(bus_stops: &[(i32, i32)]) -> i32 {
+    bus_stops.iter().map(|(x, y)| x - y).sum()
+}
+
+fn disemvowel(s: &str) -> String {
+    let vowels = ['a', 'e', 'i', 'o', 'u'];
+    s.to_string()
+        .split("")
+        .map(|x| {
+            x.chars()
+                .filter(|y| !vowels.contains(&y.to_ascii_lowercase()))
+                .collect()
+        })
+        .collect::<Vec<String>>()
+        .join("")
+    // BEST SOLUTION
+    // s.replace(['A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'], "")
+}
+
+fn remove_smallest(numbers: &[u32]) -> Vec<u32> {
+    if numbers.is_empty() {
+        numbers.to_vec()
+    } else {
+        let mut smallest: u32 = numbers[0];
+        let mut _ind: usize = 0;
+
+        for (i, n) in numbers.iter().enumerate() {
+            if n < &smallest {
+                smallest = *n;
+                _ind = i;
+            }
+        }
+        let mut new_vec = numbers.to_vec();
+        new_vec.remove(_ind);
+        new_vec
+    }
+
+    // BEST SOLUTION
+    // let mut numbers = numbers.to_vec();
+    // match numbers.iter().position_min() {
+    //     None => numbers,
+    //     Some(m) => {numbers.remove(m); numbers}
+    // }
+}

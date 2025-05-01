@@ -58,6 +58,7 @@ fn main() {
     check_turbo_fish();
     collection_types();
     macros_play();
+    filter_map_example();
 }
 
 fn take_fifth(val: Vec<i32>) -> Option<i32> {
@@ -199,4 +200,48 @@ fn macros_play() {
     assert!(my_name == "John Doe");
     assert_eq!(my_name, "John Doe");
     assert_ne!(my_name, "Jack");
+}
+
+struct Company {
+    name: String,
+    ceo: Option<String>,
+}
+
+impl Company {
+    fn new(name: &str, ceo: &str) -> Self {
+        let c = match ceo {
+            "" => None,
+            name => Some(name.to_string()),
+        };
+        Self {
+            ceo: c,
+            name: name.to_string(),
+        }
+    }
+
+    fn get_ceo(&self) -> Option<String> {
+        self.ceo.clone()
+    }
+}
+
+fn filter_map_example() {
+    let company = vec![
+        Company::new("CrawlerHub", "Unknown"),
+        Company::new("Lite", "Ram"),
+        Company::new("Facebook", ""),
+    ];
+
+    let all_comps = company
+        .into_iter()
+        .filter_map(|company| company.get_ceo())
+        .collect::<Vec<String>>();
+
+    println!("Companies: {:?}", all_comps);
+
+    let other_item = vec!["6.6", "Rujal", "4.4", "5.0", "Ram"];
+    let nums = other_item
+        .into_iter()
+        .filter_map(|x| x.parse::<f32>().ok())
+        .collect::<Vec<f32>>();
+    println!("Nums: {:?}", nums);
 }
